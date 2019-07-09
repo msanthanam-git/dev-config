@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-cd-sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-cd-sample
+  template:
+    metadata:
+      labels:
+        app: ci-cd-sample
+    spec:
+      containers:
+      - name: ci-cd-sample
+        image: onewebdev.azurecr.io/ci-cd-sample:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ci-cd-sample
+  annotations:
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
+spec:
+  type: LoadBalancer
+#  backend:
+#   serviceName: ci-cd-sample
+#  externalName: uos-hydra-ci-cd-sample-dev.uksouth.cloudapp.azure.com
+  selector:
+    app: ci-cd-sample
+  loadBalancerIP: 52.151.70.38
+  ports:
+   - name: http
+     port: 80
+     targetPort: 3000
+   - name: https
+     port: 443
+     targetPort: 3000
