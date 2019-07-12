@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: maw-crums
 spec:
-  replicas: 1
+  replicas: $(replicas)
   selector:
     matchLabels:
       app: maw-crums
