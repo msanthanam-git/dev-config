@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maw-crums
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maw-crums
+  template:
+    metadata:
+      labels:
+        app: maw-crums
+    spec:
+      containers:
+      - name: maw-crums
+        image: onewebdev.azurecr.io/uosdev/maw-crums:v5
+        env:
+        - name: PORT
+          value: "3000"
+        - name: MONGODB_URI
+          #value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/crums?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
+          #value: "mongodb://heroku_pw98r6t2:ndr17htr2jjtmpp1g0d6snrljf@ds343887.mlab.com:43887/heroku_pw98r6t2"
+          value: ${MONGODB_URI}
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maw-crums
+  annotations:
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
+spec:
+  type: LoadBalancer
+#  backend:
+#   serviceName: maw-crums
+#  externalName: uos-hydra-maw-crums-dev.uksouth.cloudapp.azure.com
+  selector:
+    app: maw-crums
+  loadBalancerIP: 51.140.137.75
+  ports:
+   - name: http
+     port: 80
+     targetPort: 3000
+   - name: https
+     port: 443
+     targetPort: 3000
