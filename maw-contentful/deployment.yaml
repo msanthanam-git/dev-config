@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: maw-contentful
-        image: onewebdev.azurecr.io/uosdev/maw-contentful
+        image: onewebdev.azurecr.io/uosdev/maw-contentful:latest
         env:
         - name: PORT
           value: "3000"
