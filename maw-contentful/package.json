@@ -1,0 +1,49 @@
+{
+  "name": "maw-contentful",
+  "version": "0.0.1",
+  "description": "Hydra Maw for Contentful",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "pm2-runtime start ecosystem.config.js --env production"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uosdev/maw-contentful.git"
+  },
+  "author": "Linden McKenzie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uosdev/maw-contentful/issues"
+  },
+  "homepage": "https://github.com/uosdev/maw-contentful#readme",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^13.1.0",
+    "@contentful/rich-text-types": "^13.1.0",
+    "debug": "^4.1.1",
+    "dotenv": "^7.0.0",
+    "fastify": "^2.0.1",
+    "fastify-cors": "^2.1.2",
+    "fastify-swagger": "^2.3.2",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10",
+    "pm2": "^3.4.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "slugify": "^1.3.4"
+  }
+}
