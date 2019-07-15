@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maw-contentful
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maw-contentful
+  template:
+    metadata:
+      labels:
+        app: maw-contentful
+    spec:
+      containers:
+      - name: maw-contentful
+        image: onewebdev.azurecr.io/uosdev/maw-contentful:v23
+        env:
+        - name: PORT
+          value: "3000"
+        - name: MONGODB_URI
+          value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/contentful?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
+          #value: "mongodb://heroku_vhhn2433:ilaqc4ahm8qkt7ojniqti4rdec@ds233737.mlab.com:33737/heroku_vhhn2433"
+        ports:
+        - containerPort: 3000      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maw-contentful
+  annotations:
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
+  
+spec:
+  type: LoadBalancer
+  selector:
+    app: maw-contentful
+  loadBalancerIP: 51.140.94.70
+  ports:
+   - name: http
+     port: 80
+     targetPort: 3000
+   - name: https
+     port: 443
+     targetPort: 3000 
+    
