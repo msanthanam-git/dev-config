@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: maw-contentful
-        image: onewebdev.azurecr.io/uosdev/maw-contentful:v23
+        image: onewebdev.azurecr.io/uosdev/maw-contentful
         env:
         - name: PORT
           value: "3000"
         - name: MONGODB_URI
-          value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/contentful?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
+          value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/crums?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
           #value: "mongodb://heroku_vhhn2433:ilaqc4ahm8qkt7ojniqti4rdec@ds233737.mlab.com:33737/heroku_vhhn2433"
         ports:
         - containerPort: 3000      
@@ -42,5 +42,4 @@ spec:
      targetPort: 3000
    - name: https
      port: 443
-     targetPort: 3000 
-    
+     targetPort: 3000  

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: maw-crums
-        image: onewebdev.azurecr.io/uosdev/maw-crums:v5
+        image: onewebdev.azurecr.io/uosdev/maw-crums
         env:
         - name: PORT
           value: "3000"
