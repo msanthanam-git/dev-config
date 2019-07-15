@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: maw-crums
 spec:
-  replicas: #{replicaCount}#  
+  replicas: 1  
   selector:
     matchLabels:
       app: maw-crums
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: maw-crums
-        image: onewebdev.azurecr.io/uosdev/maw-crums
+        image: onewebdev.azurecr.io/uosdev/maw-crums:latest
         env:
         - name: PORT
           value: "3000"
