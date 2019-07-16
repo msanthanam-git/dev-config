@@ -1,22 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maw-crums
+  name: maw-entry
 spec:
   replicas: 1  
   selector:
     matchLabels:
-      app: maw-crums
+      app: maw-entry
   template:
     metadata:
       labels:
-        app: maw-crums
+        app: maw-entry
     spec:
       containers:
-      - name: maw-crums
-        image: onewebdev.azurecr.io/uosdev/maw-crums:latest
-        command: [ "/bin/bash", "-c", "--" ]
-        args: [ "while true; do sleep 30; done;" ]
+      - name: maw-entry
+        image: onewebdev.azurecr.io/uosdev/maw-entry:latest
         env:
         - name: PORT
           value: "3000"
@@ -30,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: maw-crums
+  name: maw-entry
   annotations:
    service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
 spec:
@@ -39,8 +37,8 @@ spec:
 #   serviceName: maw-crums
 #  externalName: uos-hydra-maw-crums-dev.uksouth.cloudapp.azure.com
   selector:
-    app: maw-crums
-  loadBalancerIP: 51.140.137.75
+    app: maw-entry
+  loadBalancerIP: 51.140.57.128
   ports:
    - name: http
      port: 80
