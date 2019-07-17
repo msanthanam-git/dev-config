@@ -1,19 +1,21 @@
 {
-  "name": "maw-crums",
-  "version": "0.0.1",
+  "name": "@uos/maw-crums",
+  "version": "0.0.0-development",
   "description": "Ingesting curriculum data. ",
   "main": "./src/index.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node ./src/index.js --env production",
+    "test": "jest",
     "dev": "set DEBUG=hydra* & nodemon ./src/index.js",
-    "test": "jest"
+    "semantic-release": "semantic-release",
+    "cz": "git-cz"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uosdev/maw-crums.git"
+    "url": "https://github.com/uosdev/maw-crums.git"
   },
   "author": "",
   "license": "ISC",
@@ -22,11 +24,15 @@
   },
   "homepage": "https://github.com/uosdev/maw-crums#readme",
   "devDependencies": {
+    "commitizen": "^3.1.1",
+    "conventional-changelog-cli": "^2.0.21",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.6.4",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "semantic-release": "^15.13.18"
   },
   "dependencies": {
     "debug": "^4.1.1",
@@ -39,6 +45,15 @@
     "nodemon": "^1.18.10",
     "pm2": "^3.4.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "throng": "^4.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

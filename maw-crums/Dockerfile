@@ -1,6 +1,6 @@
 FROM alpine
 RUN apk add --no-cache nodejs npm
-WORKDIR /maw-maw-crums-delete-this
-COPY . /maw-maw-crums-delete-this
+WORKDIR /maw-crums
+COPY . /maw-crums
 RUN npm install
 CMD npm start
