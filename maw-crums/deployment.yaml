@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maw-crums
+  name: maw-crums-delete-this
 spec:
   replicas: 1  
   selector:
     matchLabels:
-      app: maw-crums
+      app: maw-crums-delete-this
   template:
     metadata:
       labels:
-        app: maw-crums
+        app: maw-crums-delete-this
     spec:
       containers:
-      - name: maw-crums
-        image: onewebdev.azurecr.io/uosdev/maw-crums:latest
-        command: [ "/bin/bash", "-c", "--" ]
-        args: [ "while true; do sleep 30; done;" ]
+      - name: maw-crums-delete-this
+        image: onewebdev.azurecr.io/uosdev/maw-crums-delete-this:latest
+        #command: [ "/bin/bash", "-c", "--" ]
+        #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
           value: "3000"
@@ -30,17 +30,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: maw-crums
+  name: maw-crums-delete-this
   annotations:
    service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
 spec:
   type: LoadBalancer
 #  backend:
-#   serviceName: maw-crums
-#  externalName: uos-hydra-maw-crums-dev.uksouth.cloudapp.azure.com
+#   serviceName: maw-crums-delete-this
+#  externalName: uos-hydra-maw-crums-delete-this-dev.uksouth.cloudapp.azure.com
   selector:
-    app: maw-crums
-  loadBalancerIP: 51.140.137.75
+    app: maw-crums-delete-this
+  loadBalancerIP: 51.145.38.19
   ports:
    - name: http
      port: 80
