@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: maw-crums-delete-this
-        image: onewebdev.azurecr.io/uosdev/maw-crums-delete-this
+        image: onewebdev.azurecr.io/uosdev/maw-crums-delete-this:v100
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
