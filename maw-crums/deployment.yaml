@@ -40,7 +40,7 @@ spec:
 #  externalName: uos-hydra-maw-crums-dev.uksouth.cloudapp.azure.com
   selector:
     app: maw-crums
-  loadBalancerIP: 51.145.38.19
+  loadBalancerIP: 51.140.137.75
   ports:
    - name: http
      port: 80
