@@ -1,1 +1,1 @@
-# dev-config
+# dev-config for deployment
