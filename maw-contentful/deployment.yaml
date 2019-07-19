@@ -1,45 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maw-contentful
+  name: $(AppName)
 spec:
-  replicas: 1
+  replicas: $(NoOfReplicas)  
   selector:
     matchLabels:
-      app: maw-contentful
+      app: $(AppName)
   template:
     metadata:
       labels:
-        app: maw-contentful
+        app: $(AppName)
     spec:
       containers:
-      - name: maw-contentful
-        image: onewebdev.azurecr.io/uosdev/maw-contentful:latest
+      - name: $(AppName)
+        image: $(ContainerRegistry)/$(AppName):latest
+        #command: [ "/bin/bash", "-c", "--" ]
+        #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
-          value: "3000"
+          value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/crums?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
-          #value: "mongodb://heroku_vhhn2433:ilaqc4ahm8qkt7ojniqti4rdec@ds233737.mlab.com:33737/heroku_vhhn2433"
+          value: $(ContentfulDBConnectionString)
         ports:
-        - containerPort: 3000      
+        - containerPort: $(AppListenPort)
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: maw-contentful
+  name: $(AppName)
   annotations:
-   service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
-  
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
 spec:
   type: LoadBalancer
+#  backend:
+#   serviceName: $(AppName)
+#  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
-    app: maw-contentful
-  loadBalancerIP: 51.140.94.70
+    app: $(AppName)
+  loadBalancerIP: $(ServiceStaticIP)
   ports:
    - name: http
-     port: 80
-     targetPort: 3000
+     port: $(ServiceHTTPPort)
+     targetPort: $(AppListenPort)
    - name: https
-     port: 443
-     targetPort: 3000  
+     port: $(ServiceHTTPSPort)
+     targetPort: $(AppListenPort)
+     
