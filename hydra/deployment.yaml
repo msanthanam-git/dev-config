@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $(AppName)
+spec:
+  replicas: $(NoOfReplicas)  
+  selector:
+    matchLabels:
+      app: $(AppName)
+  template:
+    metadata:
+      labels:
+        app: $(AppName)
+    spec:
+      containers:
+      - name: $(AppName)
+        image: $(ContainerRegistry)/$(AppName):latest
+        #command: [ "/bin/bash", "-c", "--" ]
+        #args: [ "while true; do sleep 30; done;" ]
+        env:
+        - name: PORT
+          value: "$(AppListenPort)"
+        - name: MAW_CONTENTFUL_URL
+          value: $(MAWContentfulURL)
+        - name: MAW_CRUMS_URL
+          value: $(MAWCRUMSURL)
+        - name: MAW_ENTRY_URL
+          value: $(MAWEntryURL)
+        - name: MAW_LEARN_URL
+          value: $(MAWLearnURL)          
+        - name: REDISCLOUD_URL
+          value: $(CacheURL)
+        - name: NODE_MODULES_CACHE
+          value: "$(NodeModulesCacheTrueOrFalse)"
+        ports:
+        - containerPort: $(AppListenPort)
+      - name: $(CacheName)
+        image: $(CacheImage)
+        ports:
+        - containerPort: $(CacheListenPort)        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $(AppName)
+  annotations:
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
+spec:
+  type: LoadBalancer
+#  backend:
+#   serviceName: $(AppName)
+#  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
+  selector:
+    app: $(AppName)
+  loadBalancerIP: $(ServiceStaticIP)
+  ports:
+   - name: http
+     port: $(ServiceHTTPPort)
+     targetPort: $(AppListenPort)
+   - name: https
+     port: $(ServiceHTTPSPort)
+     targetPort: $(AppListenPort)
+     
