@@ -31,7 +31,7 @@ spec:
         - name: NODE_MODULES_CACHE
           value: $(NodeModulesCacheTrueOrFalse)          
         ports:
-        - containerPort: \"$(AppListenPort)\"
+        - containerPort: $(AppListenPort)
       - name: $(CacheName)
         image: $(CacheImage)
         ports:
