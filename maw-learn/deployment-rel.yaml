@@ -38,7 +38,7 @@ spec:
 #  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
     app: $(AppName)-$(Enviroment)
-  loadBalancerIP: $(ServiceStaticIPEvn)
+  loadBalancerIP: $(ServiceStaticIPEnv)
   ports:
    - name: http
      port: $(ServiceHTTPPort)
