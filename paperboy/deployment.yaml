@@ -19,7 +19,7 @@ spec:
         #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
-          value: \"$(AppListenPort)\"
+          value: "$(AppListenPort)"
         - name: MONGODB_URI
           #value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/crums?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
           #value: $"mongodb://heroku_pw98r6t2:ndr17htr2jjtmpp1g0d6snrljf@ds343887.mlab.com:43887/heroku_pw98r6t2"
