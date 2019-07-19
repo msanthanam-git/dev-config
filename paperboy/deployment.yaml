@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: $(AppName)
-        image: onewebdev.azurecr.io/uosdev/$(AppName):latest
+        image: $(ContainerRegistry)/$(AppName):latest
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
@@ -27,11 +27,15 @@ spec:
         - name: HYDRA_URL
           value: $(HydraURL)
         - name: REDISCLOUD_URL
-          value: $(RedisURL)
+          value: $(CacheURL)
         - name: NODE_MODULES_CACHE
           value: $(NodeModulesCacheTrueOrFalse)          
         ports:
         - containerPort: $(AppListenPort)
+      - name: $(CacheName)
+        image: $(CacheImage)
+        ports:
+        - containerPort: $(CacheListenPort)        
 ---
 apiVersion: v1
 kind: Service
