@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: $(AppName)
+  name: $(AppName)- ${Enviroment}
 spec:
-  replicas: $(NoOfReplicas)
+  replicas: ${NoOfReplicas}
   selector:
     matchLabels:
-      app: $(AppName)-$(Enviroment)
+      app: $(AppName)-${Enviroment}
   template:
     metadata:
       labels:
-        app: $(AppName)-$(Enviroment)
+        app: $(AppName)-${Enviroment}
     spec:
       containers:
-      - name: $(AppName)-$(Enviroment)
+      - name: $(AppName)-${Enviroment}
         image: $(ContainerRegistry)/$(AppName):$(tag)
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
@@ -21,14 +21,14 @@ spec:
         - name: PORT
           value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: $(LearnDBConnectionStringEnv)
+          value: ${LearnDBConnectionStringEnv}
         ports:
         - containerPort: $(AppListenPort)
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: $(AppName)-$(Enviroment)
+  name: $(AppName)-${Enviroment}
   annotations:
    service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
 spec:
@@ -37,8 +37,8 @@ spec:
 #   serviceName: $(AppName)
 #  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
-    app: $(AppName)-$(Enviroment)
-  loadBalancerIP: $(ServiceStaticIPEnv)
+    app: $(AppName)-${Enviroment}
+  loadBalancerIP: ${ServiceStaticIPEnv}
   ports:
    - name: http
      port: $(ServiceHTTPPort)
