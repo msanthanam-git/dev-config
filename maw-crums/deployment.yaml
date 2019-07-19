@@ -1,50 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maw-crums
+  name: $(AppName)
 spec:
-  replicas: 1  
+  replicas: $(NoOfReplicas)  
   selector:
     matchLabels:
-      app: maw-crums
+      app: $(AppName)
   template:
     metadata:
       labels:
-        app: maw-crums
+        app: $(AppName)
     spec:
       containers:
-      - name: maw-crums
-        image: onewebdev.azurecr.io/uosdev/maw-crums:latest
+      - name: $(AppName)
+        image: $(ContainerRegistry)/$(AppName):latest
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
-          value: "3000"
+          value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: "mongodb://oneweb-dev:EdMFcE7YBiZLi9aPv83wXgtEZaurPufh2cteVEF9dEQ9Otmvg8oUWImU9KiAbOLcMli2Mu71Yg5gYO4O141Y9g%3D%3D@oneweb-dev.documents.azure.com:10255/crums?ssl=true&sslverifycertificate=false&replicaSet=globaldb"
-          #value: "mongodb://heroku_pw98r6t2:ndr17htr2jjtmpp1g0d6snrljf@ds343887.mlab.com:43887/heroku_pw98r6t2"
-          #value: $(MONGODB_URI)
+          value: $(CRUMSDBConnectionString)
         ports:
-        - containerPort: 3000
+        - containerPort: $(AppListenPort)
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: maw-crums
+  name: $(AppName)
   annotations:
-   service.beta.kubernetes.io/azure-load-balancer-resource-group: onewebdev-static-ip-rg
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
 spec:
   type: LoadBalancer
 #  backend:
-#   serviceName: maw-crums
-#  externalName: uos-hydra-maw-crums-dev.uksouth.cloudapp.azure.com
+#   serviceName: $(AppName)
+#  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
-    app: maw-crums
-  loadBalancerIP: 51.140.137.75
+    app: $(AppName)
+  loadBalancerIP: $(ServiceStaticIP)
   ports:
    - name: http
-     port: 80
-     targetPort: 3000
+     port: $(ServiceHTTPPort)
+     targetPort: $(AppListenPort)
    - name: https
-     port: 443
-     targetPort: 3000
+     port: $(ServiceHTTPSPort)
+     targetPort: $(AppListenPort)
+     
