@@ -29,7 +29,7 @@ spec:
         - name: REDISCLOUD_URL
           value: $(CacheURL)
         - name: NODE_MODULES_CACHE
-          value: $(NodeModulesCacheTrueOrFalse)          
+          value: "$(NodeModulesCacheTrueOrFalse)"
         ports:
         - containerPort: $(AppListenPort)
       - name: $(CacheName)
