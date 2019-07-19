@@ -46,4 +46,3 @@ spec:
    - name: https
      port: $(ServiceHTTPSPort)
      targetPort: $(AppListenPort)
-	 
