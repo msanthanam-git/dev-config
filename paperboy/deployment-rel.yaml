@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: $(AppName)
 spec:
-  replicas: $(NoOfReplicas)  
+  replicas: ${NoOfReplicas}
   selector:
     matchLabels:
       app: $(AppName)
@@ -14,22 +14,22 @@ spec:
     spec:
       containers:
       - name: $(AppName)
-        image: $(ContainerRegistry)/$(AppName):latest
+        image: $(ContainerRegistry)/$(AppName):$tag
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
           value: "$(AppListenPort)"
         - name: HYDRA_URL
-          value: $(HydraURL)
+          value: ${HydraURL}
         - name: REDISCLOUD_URL
-          value: $(CacheURL)
+          value: ${CacheURL}
         - name: NODE_MODULES_CACHE
-          value: "$(NodeModulesCacheTrueOrFalse)"
+          value: "${NodeModulesCacheTrueOrFalse}"
         ports:
         - containerPort: $(AppListenPort)
-      - name: $(CacheName)
-        image: $(CacheImage)
+      - name: ${CacheName}
+        image: ${CacheImage}
         ports:
         - containerPort: $(CacheListenPort)        
 ---
@@ -38,7 +38,7 @@ kind: Service
 metadata:
   name: $(AppName)
   annotations:
-   service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: ${StaticIPResourceGroup}
 spec:
   type: LoadBalancer
 #  backend:
@@ -46,7 +46,7 @@ spec:
 #  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
     app: $(AppName)
-  loadBalancerIP: $(ServiceStaticIP)
+  loadBalancerIP: ${ServiceStaticIP}
   ports:
    - name: http
      port: $(ServiceHTTPPort)
