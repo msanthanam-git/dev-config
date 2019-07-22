@@ -21,7 +21,7 @@ spec:
         - name: PORT
           value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: $(LearnDBConnectionString)
+          value: $(DBConnectionString)
         ports:
         - containerPort: $(AppListenPort)
 ---
