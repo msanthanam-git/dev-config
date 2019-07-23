@@ -21,7 +21,7 @@ spec:
         - name: PORT
           value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: ${DBConnectionStringProd}
+          value: ${DBConnectionString}
         ports:
         - containerPort: $(AppListenPort)
 ---
@@ -30,7 +30,7 @@ kind: Service
 metadata:
   name: $(AppName)
   annotations:
-   service.beta.kubernetes.io/azure-load-balancer-resource-group: ${StaticIPResourceGroupProd}
+   service.beta.kubernetes.io/azure-load-balancer-resource-group: ${StaticIPResourceGroup}
 spec:
   type: LoadBalancer
 #  backend:
@@ -38,7 +38,7 @@ spec:
 #  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
   selector:
     app: $(AppName)
-  loadBalancerIP: ${ServiceStaticIPProd}
+  loadBalancerIP: ${ServiceStaticIP}
   ports:
    - name: http
      port: $(ServiceHTTPPort)
