@@ -3,5 +3,5 @@ RUN apk add --no-cache nodejs npm
 WORKDIR /$(AppName)
 COPY . /$(AppName)
 RUN npm install
-CMD npm start
+CMD $(Debug) npm start
 
