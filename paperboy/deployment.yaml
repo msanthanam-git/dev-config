@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: $(AppName)
-        image: $(ContainerRegistry)/$(AppName):latest
+        image: $(ContainerRegistry)/$(AppName):$(BuildID)
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
