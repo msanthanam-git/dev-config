@@ -20,6 +20,8 @@ spec:
         env:
         - name: PORT
           value: "$(AppListenPort)"
+        - name: PAPERBOY_URL
+          value: ${PAPERBOY_URL}
         - name: HYDRA_URL
           value: ${HydraURL}
         - name: REDISCLOUD_URL
