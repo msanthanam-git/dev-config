@@ -11,10 +11,13 @@ spec:
     metadata:
       labels:
         app: $(AppName)
+      annotations:
+        buildID: $(BuildID)
     spec:
       containers:
       - name: $(AppName)
         image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
+        709160
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
