@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: $(AppName)
-        image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)        
+        image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
+        imagePullPolicy: Always
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
