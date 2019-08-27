@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: $(AppName)
-        image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
-        709160
+        image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)        
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
