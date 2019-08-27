@@ -31,6 +31,8 @@ spec:
           value: $(CacheURL)
         - name: NODE_MODULES_CACHE
           value: "$(NodeModulesCacheTrueOrFalse)"
+        - name: SEGMENT_KEY
+          value: $(SEGMENT_KEY)
         ports:
         - containerPort: $(AppListenPort)
       - name: $(CacheName)
