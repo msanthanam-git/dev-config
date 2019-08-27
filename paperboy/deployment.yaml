@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $(AppName)
+  annotations:
+   buildID: $(BuildID)
 spec:
   replicas: $(NoOfReplicas)  
   selector:
@@ -10,9 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: $(AppName)
-      annotations:
-        buildID: $(BuildID)
+        app: $(AppName)        
     spec:
       containers:
       - name: $(AppName)
