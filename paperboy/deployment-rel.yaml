@@ -15,17 +15,22 @@ spec:
       containers:
       - name: $(AppName)
         image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
+        imagePullPolicy: Always
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: PORT
           value: "$(AppListenPort)"
+        - name: PAPERBOY_URL
+          value: ${PAPERBOY_URL}
         - name: HYDRA_URL
           value: ${HydraURL}
         - name: REDISCLOUD_URL
           value: ${CacheURL}
         - name: NODE_MODULES_CACHE
           value: "${NodeModulesCacheTrueOrFalse}"
+        - name: SEGMENT_KEY
+          value: ${SEGMENT_KEY}
         ports:
         - containerPort: $(AppListenPort)
       - name: ${CacheName}
