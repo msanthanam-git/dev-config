@@ -15,6 +15,7 @@ spec:
       containers:
       - name: $(AppName)
         image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
+        imagePullPolicy: Always
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
@@ -22,6 +23,8 @@ spec:
           value: "$(AppListenPort)"
         - name: MONGODB_URI
           value: $(DBConnectionString)
+        - name: SEGMENT_KEY
+          value: $(SEGMENT_KEY)  
         ports:
         - containerPort: $(AppListenPort)
 ---
