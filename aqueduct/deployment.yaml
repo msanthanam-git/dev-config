@@ -25,6 +25,8 @@ spec:
           value: $(CRUMS_URL)
         - name: CRUMS_SCRIPT_TIME
           value: "$(CRUMS_SCRIPT_TIME)"
+        - name: SEGMENT_KEY
+          value: $(SEGMENT_KEY)
         ports:
         - containerPort: $(AppListenPort)
 # ---
