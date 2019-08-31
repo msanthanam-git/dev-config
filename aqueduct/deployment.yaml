@@ -15,35 +15,38 @@ spec:
       containers:
       - name: $(AppName)
         image: $(ContainerRegistry)/$(AppName):$(ShortVersionHash)
+        imagePullPolicy: Always
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
-        - name: PORT
-          value: "$(AppListenPort)"
         - name: MONGODB_URI
-          value: $(DBConnectionString)
-        ports:
-        - containerPort: $(AppListenPort)
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: $(AppName)
-  annotations:
-   service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
-spec:
-  type: LoadBalancer
-#  backend:
-#   serviceName: $(AppName)
-#  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
-  selector:
-    app: $(AppName)
-  loadBalancerIP: $(ServiceStaticIP)
-  ports:
-   - name: http
-     port: $(ServiceHTTPPort)
-     targetPort: $(AppListenPort)
-   - name: https
-     port: $(ServiceHTTPSPort)
-     targetPort: $(AppListenPort)
+          value: $(MONGODB_URI)
+        - name: CRUMS_URL
+          value: $(CRUMS_URL)
+        - name: CRUMS_SCRIPT_TIME
+          value: $(CRUMS_SCRIPT_TIME)
+        #ports:
+        #- containerPort: $(AppListenPort)
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+  # name: $(AppName)
+  # annotations:
+   # service.beta.kubernetes.io/azure-load-balancer-resource-group: $(StaticIPResourceGroup)
+# spec:
+  # type: LoadBalancer
+# #  backend:
+# #   serviceName: $(AppName)
+# #  externalName: uos-hydra-$(AppName)-dev.uksouth.cloudapp.azure.com
+  # selector:
+    # app: $(AppName)
+  # loadBalancerIP: $(ServiceStaticIP)
+  # ports:
+   # - name: http
+     # port: $(ServiceHTTPPort)
+     # targetPort: $(AppListenPort)
+   # - name: https
+     # port: $(ServiceHTTPSPort)
+     # targetPort: $(AppListenPort)
      
