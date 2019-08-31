@@ -25,8 +25,8 @@ spec:
           value: $(CRUMS_URL)
         - name: CRUMS_SCRIPT_TIME
           value: "$(CRUMS_SCRIPT_TIME)"
-        #ports:
-        #- containerPort: $(AppListenPort)
+        ports:
+        - containerPort: $(AppListenPort)
 # ---
 # apiVersion: v1
 # kind: Service
