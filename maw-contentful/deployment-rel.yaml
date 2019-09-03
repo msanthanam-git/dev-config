@@ -24,7 +24,9 @@ spec:
         - name: MONGODB_URI
           value: ${DBConnectionString}
         - name: SEGMENT_KEY
-          value: ${SEGMENT_KEY}  
+          value: ${SEGMENT_KEY}
+        - name: NODE_ENV
+          value: ${NODE_ENV}
         ports:
         - containerPort: $(AppListenPort)
 ---
