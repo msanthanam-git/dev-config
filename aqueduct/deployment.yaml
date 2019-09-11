@@ -20,7 +20,7 @@ spec:
         #args: [ "while true; do sleep 30; done;" ]
         env:
         - name: MONGODB_URI
-          value: $(MONGODB_URI)
+          value: $(MAW_CRUMS_MONGODB_URI)
         - name: CRUMS_URL
           value: $(CRUMS_URL)
         - name: CRUMS_SCRIPT_TIME
