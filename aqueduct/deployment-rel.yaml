@@ -20,8 +20,8 @@ spec:
         env:
         - name: PORT
           value: "$(AppListenPort)"
-        - name: MONGODB_URI
-          value: ${DBConnectionString}
+        - name: MAW_CRUMS_MONGODB_URI
+          value: ${MAW_CRUMS_MONGODB_URI}
         ports:
         - containerPort: $(AppListenPort)
 ---
