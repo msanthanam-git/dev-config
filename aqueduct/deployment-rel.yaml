@@ -22,6 +22,12 @@ spec:
           value: "$(AppListenPort)"
         - name: MAW_CRUMS_MONGODB_URI
           value: ${MAW_CRUMS_MONGODB_URI}
+        - name: CRUMS_URL
+          value: ${CRUMS_URL}
+        - name: CRUMS_SCRIPT_TIME
+          value: "${CRUMS_SCRIPT_TIME}"
+        - name: SEGMENT_KEY
+          value: ${SEGMENT_KEY}
         ports:
         - containerPort: $(AppListenPort)
 ---
