@@ -19,7 +19,7 @@ spec:
         #command: [ "/bin/bash", "-c", "--" ]
         #args: [ "while true; do sleep 30; done;" ]
         env:
-        - name: MONGODB_URI
+        - name: MAW_CRUMS_MONGODB_URI
           value: $(MAW_CRUMS_MONGODB_URI)
         - name: CRUMS_URL
           value: $(CRUMS_URL)
