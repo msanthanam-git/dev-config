@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk add update npm
+RUN apk add --update npm
 RUN apk add yarn
 WORKDIR /$(AppName)
 COPY . /$(AppName)
