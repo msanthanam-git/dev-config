@@ -1,5 +1,6 @@
 FROM alpine
 RUN apk add --no-cache nodejs npm
+RUN apk add yarn
 WORKDIR /$(AppName)
 COPY . /$(AppName)
 RUN npm install yarn --global
