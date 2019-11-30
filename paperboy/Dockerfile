@@ -1,11 +1,8 @@
-FROM alpine
-# RUN apk add --update npm
-RUN apk add --no-cache --update nodejs npm
-# RUN apk add --no-cache --update npm
-RUN apk add nodejs-current
-# RUN apk add yarn
+FROM node as build
 WORKDIR /$(AppName)
 COPY . /$(AppName)
-# RUN npm install yarn --global
 RUN npm install
+
+FROM gcr.io/distroless/nodejs
+COPY --from=build /$(AppName) /
 CMD $(Debug) npm start
