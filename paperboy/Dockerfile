@@ -7,4 +7,5 @@ RUN apk add yarn
 WORKDIR /$(AppName)
 COPY . /$(AppName)
 RUN npm install yarn --global
+RUN npm install
 CMD $(Debug) npm start
