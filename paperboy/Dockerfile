@@ -1,8 +1,6 @@
-FROM node as build
+FROM alpine
+RUN apk add --no-cache nodejs npm
 WORKDIR /$(AppName)
 COPY . /$(AppName)
 RUN npm install
-
-FROM gcr.io/distroless/nodejs
-COPY --from=build /$(AppName) /
 CMD $(Debug) npm start
