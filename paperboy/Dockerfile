@@ -10,8 +10,8 @@ RUN apk update
 RUN apk add npm
 RUN apk add nodejs-current
 RUN apk add yarn
-WORKDIR /paperboy
-COPY . /paperboy
+WORKDIR /$(AppName)
+COPY . /$(AppName)
 RUN yarn upgrade
 RUN yarn install
 RUN rm -f .npmrc
