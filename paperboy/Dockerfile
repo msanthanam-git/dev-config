@@ -1,6 +1,18 @@
+#FROM alpine
+#RUN apk add --no-cache nodejs npm
+#WORKDIR /$(AppName)
+#COPY . /$(AppName)
+#RUN npm install
 FROM alpine
-RUN apk add --no-cache nodejs npm
-WORKDIR /$(AppName)
-COPY . /$(AppName)
-RUN npm install
+ARG NPM_TOKEN
+COPY .npmrc .npmrc
+RUN apk update
+RUN apk add npm
+RUN apk add nodejs-current
+RUN apk add yarn
+WORKDIR /paperboy
+COPY . /paperboy
+RUN yarn upgrade
+RUN yarn install
+RUN rm -f .npmrc
 CMD $(Debug) npm start
