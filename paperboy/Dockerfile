@@ -15,4 +15,5 @@ COPY . /$(AppName)
 RUN yarn upgrade
 RUN yarn install
 RUN rm -f .npmrc
-CMD $(Debug) npm start
+# CMD $(Debug) npm start
+CMD $(Debug) npm dev
