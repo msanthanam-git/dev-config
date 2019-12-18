@@ -31,6 +31,8 @@ spec:
           value: "${NodeModulesCacheTrueOrFalse}"
         - name: SEGMENT_KEY
           value: ${SEGMENT_KEY}
+        - name: NODE_ENV
+          value: ${NODE_ENV}
         ports:
         - containerPort: $(AppListenPort)
       - name: ${CacheName}
