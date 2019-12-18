@@ -16,4 +16,6 @@ RUN yarn upgrade
 RUN yarn install
 RUN rm -f .npmrc
 # CMD $(Debug) npm start
-CMD $(Debug) npm dev
+# CMD $(Debug) npm dev
+CMD NODE_ENV=development npx nodemon -e marko app.js
+
