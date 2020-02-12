@@ -7,9 +7,9 @@
 FROM node:latest
 ARG NPM_TOKEN
 COPY .npmrc .npmrc
-RUN apk update
-RUN apk add npm
-RUN apk add nodejs-current
+#RUN apk update
+#RUN apk add npm
+#RUN apk add nodejs-current
 RUN apk add yarn
 WORKDIR /$(AppName)
 COPY . /$(AppName)
