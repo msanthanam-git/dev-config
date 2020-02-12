@@ -3,7 +3,8 @@
 #WORKDIR /$(AppName)
 #COPY . /$(AppName)
 #RUN npm install
-FROM alpine
+# FROM alpine
+FROM node:stable
 ARG NPM_TOKEN
 COPY .npmrc .npmrc
 RUN apk update
