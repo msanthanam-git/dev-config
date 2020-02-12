@@ -4,7 +4,7 @@
 #COPY . /$(AppName)
 #RUN npm install
 # FROM alpine
-FROM node:stable
+FROM node:latest
 ARG NPM_TOKEN
 COPY .npmrc .npmrc
 RUN apk update
